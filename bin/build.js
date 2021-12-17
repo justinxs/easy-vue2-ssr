@@ -1,13 +1,13 @@
 const env = process.env;
-const Webpack = require('webpack');
+const webpack = require('webpack');
 const clientConfig = require('../build/webpack.client.conf.js')(env);
 const serverConfig = require('../build/webpack.server.conf.js')(env);
-const themeConfig = require('../build/webpack.theme.js')(env);
+const themeConfig = require('../build/webpack.theme.conf.js')(env);
 const rm = require('rimraf');
 const path = require('path');
 const loadESMoudle = require('./loadESMoudle');
 
-const compiler = Webpack([clientConfig, serverConfig, themeConfig]);
+const compiler = webpack([clientConfig, serverConfig, themeConfig]);
 
 loadESMoudle(['chalk', 'ora']).then(([chalk, ora]) => {
     const spinner = ora('building...').start();

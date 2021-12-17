@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const baseConfig = require('./webpack.base.js');
+const baseConfig = require('./webpack.base.conf.js');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
