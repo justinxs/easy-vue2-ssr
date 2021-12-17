@@ -1,0 +1,17 @@
+{
+    "presets": [
+		[
+			"@babel/preset-env",
+			{
+				"useBuiltIns": "usage",
+				"corejs": "3",
+				"targets": {
+					"android": 9
+				}
+			}
+		]
+	],
+    "plugins": [
+        "@babel/syntax-dynamic-import"
+    ]
+}

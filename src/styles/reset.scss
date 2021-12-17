@@ -1,0 +1,161 @@
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+dd,
+form,
+hr,
+input,
+textarea,
+select,
+button {
+	margin: 0;
+}
+
+ul,
+ol,
+option,
+input,
+textarea,
+select,
+button {
+	padding: 0;
+}
+
+article,
+aside,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+figure,
+li {
+	display: block;
+}
+
+input,
+textarea,
+select,
+button,
+iframe {
+	border: 1px solid gray;
+}
+
+input,
+textarea,
+select,
+button {
+	outline: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: 0;
+}
+
+ul,
+ol {
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+abbr,
+acronym {
+	border: 0;
+	font-variant: normal;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+/*基本的初始化样式*/
+html {
+	/*用来防止IE和Opera浏览器下的Bug*/
+	overflow: auto;
+	/*隐藏滚动，垂直滚动根据内容自适应（去除IE默认垂直滚动条）*/
+	-webkit-tap-highlight-color: transparent;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	height: 100%;
+	/*在IE下body的百分高度需要在html设置此值*/
+}
+
+body {
+    height: 100%;
+    font-family: $font-family-g;
+	-webkit-font-smoothing: antialiased;
+}
+
+fieldset,
+img,
+iframe {
+	/*IE下img标签被a标签嵌套时，img标签就会有边框*/
+	border: 0;
+}
+
+a img,
+img {
+	/*解决图片在IE7以及IE6下的缩放影响图片质量的问题*/
+	-ms-interpolation-mode: bicubic;
+}
+
+q:before,
+q:after {
+	content: '';
+}
+
+i {
+	/*i标签让内容斜体，根据具体使用情况判断是否需要初始化为不倾斜*/
+	font-style: normal;
+}
+
+//a,area { blr:expression(this.onFocus=this.blur()) } /* 去掉链接时的虚框 for IE */
+a:focus,
+area:focus {
+	/* 去掉链接时的虚框 for Firefox */
+	-moz-outline-style: none;
+	outline-style: none;
+}
+
+//去除点击时候得阴影
+a:active,
+li:active {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+	-moz-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+	-ms-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+	-o-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+}
+
+input::-webkit-input-speech-button {
+	display: none;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+}
+
+input,
+textarea {
+    font-family: $font-family-g;
+	user-select: text !important;
+}
+
+img {
+	user-select: none;
+}

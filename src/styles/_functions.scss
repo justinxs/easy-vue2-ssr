@@ -1,0 +1,38 @@
+@function getMapVal($key, $map) {
+    $val: null;
+    @if map-has-key($map, $key) {
+        $val: map-get($map, $key);
+    } @else {
+        $val: map-get($map, 'default');
+    }
+
+    @return $val;
+};
+
+@function getTheme($name, $themes) {
+    $theme: ();
+    @each $key, $map in $themes {
+        $theme: map-merge($theme, ($key: getMapVal($name, $map)));
+    }
+    @return $theme;
+};
+
+/**
+ * 按照 keys 顺序传值生成主题项
+ * 若传值长度小于 keys 主题的数量，则取第一个值作为默认值
+ */
+@function createThemeItem($themeList, $items) {
+    $themeCount: length($themeList);
+    $themeMap: ();
+    $len: length($items);
+    @for $i from 1 through $themeCount {
+        $name: nth($themeList, $i);
+        @if $len >= $i {
+            $themeMap: map-merge($themeMap, ($name: nth($items, $i)));
+        } @else {
+            $themeMap: map-merge($themeMap, ($name: nth($items, 1)));
+        }
+    };
+
+    @return $themeMap;
+};

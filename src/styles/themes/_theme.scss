@@ -1,0 +1,31 @@
+@import '../variables';
+@import '../functions';
+@import '../mixins';
+ 
+$themeList: 'light' 'night' 'default';
+@function themeItem($items...) {
+    @return createThemeItem($themeList, $items);
+};
+ 
+/**
+ * 主题配置map
+ * 
+ */
+
+$themes: (
+    primary-color: themeItem(#A400FF, #EB0707),
+);
+
+@mixin setTheme($name) {
+    /**
+     * 顶部公共变量，block 后缀定义的是 css属性集合，数据类型是一个 map
+     * 对于主题皮肤来说，一般公共变量是 颜色值 或者 主题背景图，尽量减少与主题无关的其他变量
+    */
+    $theme: getTheme($name, $themes);
+
+    $primary-color: getMapVal('primary-color', $theme);
+
+    body {
+        background-color: $primary-color;
+    }
+}

@@ -5,26 +5,16 @@ const serverConfig = require('../build/webpack.server.conf.js')(env);
 const themeConfig = require('../build/webpack.theme.js')(env);
 const rm = require('rimraf');
 const path = require('path');
-const nodemon = require('nodemon');
 const loadESMoudle = require('./loadESMoudle');
 
 const compiler = Webpack([clientConfig, serverConfig, themeConfig]);
-let serverStart = false;
 
 loadESMoudle(['chalk', 'ora']).then(([chalk, ora]) => {
     const spinner = ora('building...').start();
 
     rm.sync(path.resolve(__dirname, '../dist'));
-    compiler.watch({
-        aggregateTimeout: 300,
-        poll: undefined
-    }, (err, stats) => {
+    compiler.run((err, stats) => {
         spinner.stop();
-        if (!serverStart) {
-            nodemon(`--watch dist/vue-ssr-client-manifest.json --watch index.html --watch dist/vue-ssr-server-manifest.json --watch server -e js --watch config -e js,json --ignore node_modules/**node_modules --inspect=3001 ./server/main.js`);
-            serverStart = true;
-        }
-
         if (err) {
             console.error(chalk.red(err.stack || err));
             if (err.details) {
@@ -57,13 +47,4 @@ loadESMoudle(['chalk', 'ora']).then(([chalk, ora]) => {
             console.warn(info.warnings);
         }
     });
-});
-
-nodemon.on('start', function() {
-	console.log('App has started');
-}).on('quit', function() {
-	console.log('App has quit');
-	process.exit();
-}).on('restart', function(files) {
-	console.log('App restarted due to: ', files);
 });
