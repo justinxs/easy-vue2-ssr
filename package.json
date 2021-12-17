@@ -1,0 +1,20 @@
+{
+  "name": "easy-vue2-ssr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justinxs/easy-vue2-ssr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/justinxs/easy-vue2-ssr/issues"
+  },
+  "homepage": "https://github.com/justinxs/easy-vue2-ssr#readme"
+}
