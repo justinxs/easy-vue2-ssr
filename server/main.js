@@ -9,7 +9,7 @@ const config = require('../config/server.json');
 const { createBundleRenderer } = require('vue-server-renderer');
 const serverBundle = require('../dist/vue-ssr-server-bundle.json');
 const clientManifest = require('../dist/vue-ssr-client-manifest.json');
-const template = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf-8');
+const template = fs.readFileSync(path.resolve(__dirname, './template/index.html'), 'utf-8');
 const microCache = new LRU({
     max: 100,
     maxAge: 1000 // 重要提示：条目在 1 秒后过期。

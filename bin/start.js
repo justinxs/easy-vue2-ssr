@@ -21,7 +21,7 @@ loadESMoudle(['chalk', 'ora']).then(([chalk, ora]) => {
     }, (err, stats) => {
         spinner.stop();
         if (!serverStart) {
-            nodemon(`--watch dist/vue-ssr-client-manifest.json --watch index.html --watch dist/vue-ssr-server-manifest.json --watch server -e js --watch config -e js,json --ignore node_modules/**node_modules --inspect=3001 ./server/main.js`);
+            nodemon(`-e js,json,html --watch dist/vue-ssr-client-manifest.json --watch dist/vue-ssr-server-manifest.json --watch server --watch config --ignore node_modules/**node_modules --inspect=3001 ./server/main.js`);
             serverStart = true;
         }
 
