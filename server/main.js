@@ -1,4 +1,3 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'production'; // 在 2.5.0+ 版本中，嵌入式 script 也可以在生产模式 (production mode) 下自行移除
 const path = require('path');
 const fs = require('fs');
 const Koa = require('koa');
@@ -28,8 +27,6 @@ const renderer = createBundleRenderer(serverBundle, {
     clientManifest, // （可选）客户端构建 manifest
     inject: false
 });
-
-console.log(process.env.NODE_ENV || 'production')
 
 // 静态资源转发
 router.get(/.*\.(js|css|png|jpg|jpeg|gif|webp|ico|xml|xsl|txt|mp3|zip|htc|swf|json|svga|heic|ttf|woff)/, async (ctx, next) => {
