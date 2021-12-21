@@ -76,7 +76,7 @@ class Events {
     getCallbackId() {
         const id = URL.createObjectURL(new Blob());
         URL.revokeObjectURL(id);
-        return id.substr(-36);
+        return id.slice(-36);
     }
 }
 
