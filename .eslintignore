@@ -1,0 +1,5 @@
+bin/*.js
+build/*.js
+config/*.js
+server
+src/assets

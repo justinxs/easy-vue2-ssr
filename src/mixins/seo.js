@@ -5,7 +5,7 @@ function getSeo(vm) {
     if (seo) {
         return typeof seo === 'function'
             ? seo.call(vm)
-            : seo
+            : seo;
     }
 }
 

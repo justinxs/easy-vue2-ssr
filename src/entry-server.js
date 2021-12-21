@@ -35,4 +35,4 @@ export default context => {
             }).catch(reject);
         }, reject);
     });
-}
+};

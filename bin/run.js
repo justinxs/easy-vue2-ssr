@@ -1,4 +1,4 @@
-// vue ssr 在 2.5.0+ 版本中，嵌入式 script 也可以在生产模式 (production mode) 下自行移除
+// vue ssr 在 2.5.0+ 版本中，嵌入式 script (window.__INITIAL_STATE__) 也可以在生产模式 (production mode) 下自行移除
 process.env.NODE_ENV = 'production'; 
 
 // 优先加载这两个事件捕获,监听系统所有没有处理的异常

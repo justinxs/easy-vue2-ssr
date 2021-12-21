@@ -1,0 +1,13 @@
+{
+    "name": "Vue SSR 2.0",
+    "short_name": "Vue SSR",
+    "icons": [{
+        "src": "/favicon.ico",
+        "sizes": "32x32",
+        "type": "image/vnd.microsoft.icon"
+    }],
+    "start_url": "/",
+    "background_color": "#f2f3f5",
+    "display": "standalone",
+    "theme_color": "#f60"
+}

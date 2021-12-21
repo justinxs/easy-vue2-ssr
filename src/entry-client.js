@@ -28,7 +28,7 @@ router.onReady(() => {
         });
 
         if (!activated.length) {
-            return next()
+            return next();
         }
 
         // 这里如果有加载指示器 (loading indicator)，就触发
@@ -38,12 +38,11 @@ router.onReady(() => {
                 return c.asyncData({ store, route: to });
             }
         })).then(() => {
-
             // 停止加载指示器(loading indicator)
 
             next();
         }).catch(next);
-    })
+    });
 
     app.$mount('#app');
 });
