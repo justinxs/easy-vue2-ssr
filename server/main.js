@@ -8,6 +8,7 @@ const bodyparserMiddleware = require('./middleware/bodyparser');
 const staticMiddleware = require('./middleware/static');
 const router = require('./route');
 const ssrRender = require('./ssrRender');
+require('./logger');
 
 app.context.ssrRender = ssrRender;
 
