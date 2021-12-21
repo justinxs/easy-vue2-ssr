@@ -7,4 +7,3 @@ module.exports = async (ctx, next) => {
         ctx.body = 'Internal Server Error';
     }
 };
-  

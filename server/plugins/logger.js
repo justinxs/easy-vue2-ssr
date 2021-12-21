@@ -14,7 +14,7 @@ const loggerConfig = {
     categories: {
         default: {
             appenders: ['console', 'dateFile'],
-            level: 'debug'
+            level: process.env.NODE_ENV === 'production' ? 'error' : 'debug'
         }
     },
     disableClustering: true
@@ -22,12 +22,14 @@ const loggerConfig = {
 
 log4js.configure(loggerConfig);
 
-const logger = log4js.getLogger('console');
+module.exports = app => {
+    const logger = log4js.getLogger('console');
 
-console.debug = logger.debug.bind(logger);
-console.log = logger.info.bind(logger);
-console.info = logger.info.bind(logger);
-console.warn = logger.warn.bind(logger);
-console.error = logger.error.bind(logger);
+    console.debug = logger.debug.bind(logger);
+    console.log = logger.info.bind(logger);
+    console.info = logger.info.bind(logger);
+    console.warn = logger.warn.bind(logger);
+    console.error = logger.error.bind(logger);
 
-module.exports = logger;
+    return logger;
+};

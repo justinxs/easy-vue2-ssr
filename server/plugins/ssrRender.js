@@ -2,9 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const LRU = require('lru-cache');
 const { createBundleRenderer } = require('vue-server-renderer');
-const serverBundle = require('../dist/vue-ssr-server-bundle.json');
-const clientManifest = require('../dist/vue-ssr-client-manifest.json');
-const template = fs.readFileSync(path.resolve(__dirname, './template/index.html'), 'utf-8');
+const serverBundle = require('../../dist/vue-ssr-server-bundle.json');
+const clientManifest = require('../../dist/vue-ssr-client-manifest.json');
+const template = fs.readFileSync(path.resolve(__dirname, '../template/index.html'), 'utf-8');
 const microCache = new LRU({
     max: 100,
     maxAge: 1000 // 重要提示：条目在 1 秒后过期。
@@ -24,7 +24,7 @@ const renderer = createBundleRenderer(serverBundle, {
 });
 
 
-module.exports = async function ssrRender(_context) {
+async function ssrRender(_context) {
     const ctx = this;
     const cacheable = isCacheable(ctx);
     if (cacheable) {
@@ -59,3 +59,7 @@ module.exports = async function ssrRender(_context) {
             }
         });
 }
+
+module.exports = app => {
+    app.context.ssrRender = ssrRender;
+};
