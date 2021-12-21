@@ -39,7 +39,7 @@ module.exports = async function ssrRender(_context) {
         url: ctx.url,
         title: '',
         meta: `<meta name="timestamp" content="${Date.now()}">`,
-        link: `<link rel="manifest" href="/manifest.json">`
+        link: `<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">`
     };
 
     return renderer.renderToString(Object.assign(context, _context))
