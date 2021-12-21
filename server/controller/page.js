@@ -2,10 +2,10 @@
 module.exports = class pageController {
 
     async home(ctx, next) {
-        return ctx.ssrRender({ title: 'Home' })
+        return ctx.ssrRender();
     }
 
     async foo(ctx, next) {
-        return ctx.ssrRender({})
+        return ctx.ssrRender();
     }
 };

@@ -37,7 +37,7 @@ module.exports = async function ssrRender(_context) {
     }
     const context = {
         url: ctx.url,
-        title: 'hello',
+        title: '',
         meta: `<meta name="timestamp" content="${Date.now()}">`,
         link: `<link rel="manifest" href="/manifest.json">`
     };

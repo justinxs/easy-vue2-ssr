@@ -6,6 +6,8 @@
     </div>
 </template>
 <script>
+import { login } from '@/api/user';
+
 export default {
     asyncData({ store, route }) {
         // 触发 action 后，会返回 Promise
@@ -32,6 +34,9 @@ export default {
     created() {
     },
     mounted() {
+        login({ name: '乌蝇哥', id: 123456 }).then(data => {
+            console.log(data);
+        });
     },
     methods: {
     }

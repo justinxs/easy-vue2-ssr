@@ -1,5 +1,7 @@
 <template>
-    <div class="foo">foo</div>
+    <div class="foo">
+        <div class="pretty"></div>
+    </div>
 </template>
 <script>
 export default {
