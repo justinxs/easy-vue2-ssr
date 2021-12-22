@@ -2,11 +2,16 @@ module.exports = [
     {
         path: '/',
         method: 'get',
-        action: 'page:home'
+        action: 'page'
     },
     {
         path: '/foo',
         method: 'get',
-        action: 'page:foo'
+        action: 'page'
+    },
+    {
+        path: '/login',
+        method: 'get',
+        action: 'page'
     }
 ];

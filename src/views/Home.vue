@@ -12,7 +12,6 @@
     </div>
 </template>
 <script>
-import { login } from '@/api/user';
 import { changeTheme } from '@/utils/theme';
 
 export default {
@@ -42,9 +41,7 @@ export default {
     created() {
     },
     mounted() {
-        login({ name: '乌蝇哥', id: 123456 }).then(data => {
-            console.log(data);
-        });
+        
     },
     methods: {
         switchTheme(theme) {
