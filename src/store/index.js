@@ -7,7 +7,10 @@ Vue.use(Vuex);
 export function createStore() {
     return new Vuex.Store({
         state: {
-            testID: ''
+            testID: '',
+            seoMap: {},
+            whiteList: [],
+            loginName: ''
         },
         actions: {
             test({ state }, id) {
@@ -15,7 +18,15 @@ export function createStore() {
             }
         },
         mutations: {
-            
+            setLoginName(state, val) {
+                state.loginName = val;
+            },
+            setSeoMap(state, data) {
+                state.seoMap = data;
+            },
+            setWhiteList(state, data) {
+                state.whiteList = data;
+            }
         },
         modules: {
             foo

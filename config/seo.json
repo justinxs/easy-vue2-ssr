@@ -1,0 +1,17 @@
+{
+    "/": {
+        "title": "Home",
+        "keywords": "Home",
+        "description": "Home"
+    },
+    "/foo": {
+        "title": "Foo",
+        "keywords": "Foo",
+        "description": "Foo"
+    },
+    "/login": {
+        "title": "Login",
+        "keywords": "Login",
+        "description": "Login"
+    }
+}

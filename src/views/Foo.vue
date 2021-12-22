@@ -8,13 +8,6 @@ export default {
     asyncData({ store, route }) {
         return Promise.resolve()
     },
-    seo() {
-        return {
-            title: 'foo',
-            keywords: 'foo',
-            description: 'foo'
-        }
-    },
     data() {
         return {
         }

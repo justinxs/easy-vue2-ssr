@@ -7,6 +7,11 @@ export default context => {
     return new Promise((resolve, reject) => {
         const { app, router, store } = createApp();
 
+        // 全局注入服务端数据到store
+        store.commit('setLoginName', context.loginName);
+        store.commit('setSeoMap', context.seoMap);
+        store.commit('setWhiteList', context.whiteList);
+
         router.push(context.url);
 
         router.onReady(() => {

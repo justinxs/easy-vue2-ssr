@@ -11,13 +11,6 @@ export default {
         return {
         }
     },
-    seo() {
-        return {
-            title: 'login',
-            keywords: 'login',
-            description: 'login'
-        }
-    },
     components: {
     },
     created() {
@@ -27,6 +20,7 @@ export default {
             login({ name: '乌蝇哥', id: 123456 }).then(data => {
                 console.log(data);
                 if (data.code == 200) {
+                    this.$store.commit('setLoginName', data.data.name);
                     this.$router.replace(this.$route.query.redirect || '/')
                 }
             });

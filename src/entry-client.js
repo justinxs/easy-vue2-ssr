@@ -48,3 +48,47 @@ router.onReady(() => {
 
     app.$mount('#app');
 });
+
+router.beforeEach((to, from, next) => {
+    const seoMap = store.state.seoMap;
+    const pageSeo = seoMap[to.path] || seoMap['/'];
+    const whiteList = store.state.whiteList;
+    const loginName = store.state.loginName;
+
+    if (to.path !== '/login' && !loginName) {
+        if (!whiteList.includes(to.path)) {
+            return next(`/login?redirect=${to.fullPath}`);
+        }
+    } else if (to.path === '/login' && loginName) {
+        return next('/');
+    }
+
+    next();
+
+    app.$nextTick(() => {
+        if (pageSeo) {
+            Object.keys(pageSeo).forEach(key => {
+                let meta;
+                switch (key) {
+                    case 'title':
+                        document.title = pageSeo[key];
+                        break;
+                    case 'keywords':
+                    case 'description':
+                        meta = document.head.querySelector(`meta[name=${key}]`);
+                        if (meta) {
+                            meta.setAttribute('content', pageSeo[key]);
+                        } else {
+                            meta = document.createElement('meta');
+                            meta.setAttribute('name', key);
+                            meta.setAttribute('content', pageSeo[key]);
+                            document.head.appendChild(meta);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+    });
+});

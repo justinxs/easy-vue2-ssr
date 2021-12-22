@@ -4,6 +4,6 @@ module.exports = async (ctx, next) => {
     
     await next();
 
-    console.log(ctx.url, ctx.type)
+    // console.log(ctx.url, ctx.type);
     // 后置响应处理
 };

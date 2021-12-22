@@ -19,13 +19,6 @@ export default {
         // 触发 action 后，会返回 Promise
         return store.dispatch('test', route.path);
     },
-    seo() {
-        return {
-            title: 'index',
-            keywords: 'index',
-            description: 'index'
-        }
-    },
     data() {
         return {
             themes: ['light', 'night']

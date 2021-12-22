@@ -9,11 +9,48 @@ const microCache = new LRU({
     max: 100,
     maxAge: 1000 // 重要提示：条目在 1 秒后过期。
 });
+const seoMap = require('../../config/seo.json');
 
 const isCacheable = ctx => {
     // 实现逻辑为，检查请求是否是用户特定(user-specific)。
     // 只有非用户特定 (non-user-specific) 页面才会缓存
     return false;
+};
+
+const getSeo = name => ({ ...(seoMap[name] || seoMap['/']) });
+
+const mergeContext = (ctx, options) => {
+    const seo = options.seo || getSeo(ctx.path);
+    const context = Object.assign({
+        url: ctx.url,
+        title: '',
+        meta: `<meta name="timestamp" content="${Date.now()}">`,
+        link: `<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">`
+    }, options);
+    
+    Object.keys(seo).forEach(k => {
+        let val = seo[k] || '';
+        switch (k) {
+            case 'keywords':
+            case 'description':
+                if (!context.meta) context.meta = '';
+
+                if (val) {
+                    context.meta += `<meta name="${k}" content="${val}">`;
+                }
+                break;
+            default:
+                context[k] = val;
+                break;
+        }
+    });
+
+    context.seoMap = {
+        ...JSON.parse(JSON.stringify(seoMap)),
+        [ctx.path]: seo
+    };
+
+    return context;
 };
 
 const renderer = createBundleRenderer(serverBundle, {
@@ -35,14 +72,10 @@ async function ssrRender(_context) {
             return;
         }
     }
-    const context = {
-        url: ctx.url,
-        title: '',
-        meta: `<meta name="timestamp" content="${Date.now()}">`,
-        link: `<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">`
-    };
 
-    return renderer.renderToString(Object.assign(context, _context))
+    const context = mergeContext(ctx, _context);
+
+    return renderer.renderToString(context)
         .then(html => {
             if (cacheable) {
                 microCache.set(ctx.url, html);
