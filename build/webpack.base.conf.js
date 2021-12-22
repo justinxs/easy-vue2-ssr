@@ -5,7 +5,7 @@ const { VueLoaderPlugin } = require('vue-loader');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = platform => {
+module.exports = target => {
     return {
         performance: {
             // 资源文件最大限制大小warning提示 1000kb
@@ -37,7 +37,7 @@ module.exports = platform => {
                 {
                     test: /\.s?css$/i,
                     use: [
-                        platform == 'server' ? {
+                        target == 'server' ? {
                             loader: 'null-loader'
                         } : {
                             loader: MiniCssExtractPlugin.loader,
