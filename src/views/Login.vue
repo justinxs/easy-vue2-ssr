@@ -1,6 +1,7 @@
 <template>
     <div class="login">
         登录页
+        <button @click="login">登录</button>
     </div>
 </template>
 <script>
@@ -16,7 +17,10 @@ export default {
     created() {
     },
     mounted() {
-        setTimeout(() => {
+        
+    },
+    methods: {
+        login() {
             login({ name: '乌蝇哥', id: 123456 }).then(data => {
                 console.log(data);
                 if (data.code == 200) {
@@ -24,9 +28,7 @@ export default {
                     this.$router.replace(this.$route.query.redirect || '/')
                 }
             });
-        }, 1000);
-    },
-    methods: {
+        }
     }
 }
 </script>

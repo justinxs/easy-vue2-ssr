@@ -33,10 +33,8 @@ const mergeContext = (ctx, options) => {
         switch (k) {
             case 'keywords':
             case 'description':
-                if (!context.meta) context.meta = '';
-
                 if (val) {
-                    context.meta += `<meta name="${k}" content="${val}">`;
+                    context.meta = (context.meta || '') + `<meta name="${k}" content="${val}">`;
                 }
                 break;
             default:
@@ -83,6 +81,7 @@ async function ssrRender(_context) {
             ctx.type = 'html';
             ctx.body = html;
         }).catch(err => {
+            console.error(err);
             if (err.code === 404) {
                 ctx.status = 404;
                 ctx.body = 'Page not found';
