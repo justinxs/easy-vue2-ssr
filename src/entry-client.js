@@ -1,4 +1,8 @@
 import { createApp } from './app';
+import NProgress from 'nprogress'; // progress bar
+import 'nprogress/nprogress.css'; // progress bar style
+
+NProgress.configure({ showSpinner: false }); // NProgress Configuration
 
 // 客户端特定引导逻辑……
 
@@ -55,6 +59,8 @@ router.beforeEach((to, from, next) => {
     const whiteList = store.state.whiteList;
     const loginName = store.state.loginName;
 
+    NProgress.start();
+
     if (to.path !== '/login' && !loginName) {
         if (!whiteList.includes(to.path)) {
             return next(`/login?redirect=${to.fullPath}`);
@@ -91,4 +97,9 @@ router.beforeEach((to, from, next) => {
             });
         }
     });
+});
+
+router.afterEach(() => {
+    console.log(NProgress);
+    NProgress.done(); // finish progress bar
 });

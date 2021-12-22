@@ -1,9 +1,10 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const baseConfig = require('./webpack.base.conf.js');
+const baseConfig = require('./webpack.base.conf.js')('client');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env) => {
     const isProd = env.NODE_ENV === 'production';
@@ -39,6 +40,12 @@ module.exports = (env) => {
         mode: env.NODE_ENV,
         entry: './src/entry-client.js',
         plugins: [
+            // 提取style生成 css文件
+            new MiniCssExtractPlugin({
+                filename: 'css/[name].[contenthash:8].css',
+                chunkFilename: 'css/[id][contenthash:8].css',
+                ignoreOrder: true
+            }),
             new webpack.DefinePlugin({
                 'process.env.VUE_ENV': '"client"'
             }),

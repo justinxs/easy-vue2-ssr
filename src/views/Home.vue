@@ -4,7 +4,7 @@
         <img style="width: 667px;height: 500px;" src="~@images/flower.webp" alt="">
         <router-link to="/foo">foo</router-link>
 
-        <ul>
+        <ul class="theme-buttons">
             <li v-for="theme in themes" :key="theme">
                 <button  @click="switchTheme(theme)">{{ theme }}</button>
             </li>
@@ -43,3 +43,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.theme-buttons {
+    display: flex;
+}
+</style>
