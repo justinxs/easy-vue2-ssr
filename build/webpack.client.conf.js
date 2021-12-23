@@ -20,6 +20,22 @@ module.exports = (env) => {
                     minChunks: 1,
                     minSize: 0
                 },
+                // 将非异步引入的 styles 文件夹内的样式 合并到一个css文件
+                global: {
+                    name: "global",
+                    chunks: "initial",
+                    test: /[\\/]src[\\/]styles[\\/]/,
+                    priority: 10,
+                    minChunks: 1,
+                    minSize: 0
+                },
+                // 其他样式 合并到 component.css， 主要是 .vue 文件中的 style 或者异步组件中 import 的样式
+                component: {
+                    name: "component",
+                    chunks: "all",
+                    type: "css/mini-extract",
+                    enforce: true
+                },
             }
         }
     };
@@ -43,7 +59,7 @@ module.exports = (env) => {
             // 提取style生成 css文件
             new MiniCssExtractPlugin({
                 filename: 'css/[name].[contenthash:8].css',
-                chunkFilename: 'css/[id][contenthash:8].css',
+                chunkFilename: 'css/[id].[contenthash:8].css',
                 ignoreOrder: true
             }),
             new webpack.DefinePlugin({

@@ -4,6 +4,8 @@
     </div>
 </template>
 <script>
+import '@/styles/modules/user.scss';
+
 export default {
     asyncData({ store, route }) {
         return Promise.resolve()
@@ -22,3 +24,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.login button {
+    cursor: pointer;
+}
+</style>

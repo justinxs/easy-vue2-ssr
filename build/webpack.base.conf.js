@@ -22,10 +22,7 @@ module.exports = target => {
             rules: [
                 {
                     test: /\.vue$/,
-                    loader: 'vue-loader',
-                    options: {
-                        extractCSS: true
-                    }
+                    loader: 'vue-loader'
                 },
                 {
                     test: /\.m?js$/,

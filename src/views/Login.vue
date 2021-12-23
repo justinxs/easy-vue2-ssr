@@ -32,3 +32,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.theme-buttons {
+    display: flex;
+}
+</style>
