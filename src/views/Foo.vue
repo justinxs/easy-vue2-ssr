@@ -1,17 +1,14 @@
 <template>
-    <div class="foo">foo</div>
+    <div class="foo">
+        <div class="pretty"></div>
+    </div>
 </template>
 <script>
+import '@/styles/modules/user.scss';
+
 export default {
     asyncData({ store, route }) {
         return Promise.resolve()
-    },
-    seo() {
-        return {
-            title: 'foo',
-            keywords: 'foo',
-            description: 'foo'
-        }
     },
     data() {
         return {
@@ -27,3 +24,8 @@ export default {
     }
 }
 </script>
+<style scoped lang="scss">
+.login button {
+    cursor: pointer;
+}
+</style>

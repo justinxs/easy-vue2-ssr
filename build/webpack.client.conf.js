@@ -1,9 +1,10 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const baseConfig = require('./webpack.base.conf.js');
+const baseConfig = require('./webpack.base.conf.js')('client');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env) => {
     const isProd = env.NODE_ENV === 'production';
@@ -18,6 +19,29 @@ module.exports = (env) => {
                     priority: 10,
                     minChunks: 1,
                     minSize: 0
+                },
+                // 将非异步引入的 styles 文件夹内的样式 合并到一个css文件
+                global: {
+                    name: "global",
+                    chunks: "initial",
+                    test: /[\\/]src[\\/]styles[\\/]/,
+                    priority: 10,
+                    minChunks: 1,
+                    minSize: 0
+                },
+                // 其他样式 合并到 component.css， 主要是 .vue 文件中的 style 或者异步组件中 import 的样式
+                component: {
+                    name: "component",
+                    chunks: "all",
+                    type: "css/mini-extract",
+                    // 只合并 .vue 文件中的 style 样式
+                    // test: module => {
+                    //     if (module.type === 'css/mini-extract' && /[\\/]src[\\/].+?\.vue\?vue&type=style/.test(module._identifier)) {
+                    //         return true
+                    //     }
+                    //     return false
+                    // },
+                    enforce: true
                 },
             }
         }
@@ -39,6 +63,12 @@ module.exports = (env) => {
         mode: env.NODE_ENV,
         entry: './src/entry-client.js',
         plugins: [
+            // 提取style生成 css文件
+            new MiniCssExtractPlugin({
+                filename: 'css/[name].[contenthash:8].css',
+                chunkFilename: 'css/[name].[contenthash:8].css',
+                ignoreOrder: true
+            }),
             new webpack.DefinePlugin({
                 'process.env.VUE_ENV': '"client"'
             }),
