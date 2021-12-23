@@ -66,7 +66,7 @@ module.exports = (env) => {
             // 提取style生成 css文件
             new MiniCssExtractPlugin({
                 filename: 'css/[name].[contenthash:8].css',
-                chunkFilename: 'css/[id].[contenthash:8].css',
+                chunkFilename: 'css/[name].[contenthash:8].css',
                 ignoreOrder: true
             }),
             new webpack.DefinePlugin({
