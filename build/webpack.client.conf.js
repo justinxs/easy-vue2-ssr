@@ -34,6 +34,13 @@ module.exports = (env) => {
                     name: "component",
                     chunks: "all",
                     type: "css/mini-extract",
+                    // 只合并 .vue 文件中的 style 样式
+                    // test: module => {
+                    //     if (module.type === 'css/mini-extract' && /[\\/]src[\\/].+?\.vue\?vue&type=style/.test(module._identifier)) {
+                    //         return true
+                    //     }
+                    //     return false
+                    // },
                     enforce: true
                 },
             }
