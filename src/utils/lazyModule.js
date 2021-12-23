@@ -1,14 +1,15 @@
 import Events from './events';
 
 class LazyModule extends Events {
-    constructor(sourceMap) {
+    constructor(options = {}) {
         super();
-        this.sourceMap = sourceMap || {};
+        this.sourceMap = options.sourceMap || {};
+        this.versionMeta = options.versionMeta || 'resource-version';
     }
 
     get version() {
         if (!this.sourceVersion) {
-            let resourceMeta = document.head.querySelector('meta[name="resource-version"]');
+            let resourceMeta = document.head.querySelector(`meta[name="${this.versionMeta}"]`);
             this.sourceVersion = (resourceMeta && resourceMeta.getAttribute('content')) || Date.now();
         }
         return this.sourceVersion;

@@ -12,8 +12,6 @@ if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__);
 }
 
-window.THEME = window.STATIC_THEME = process.env.THEME;
-
 // 这里假定 App.vue 模板中根元素具有 `id="app"`
 router.onReady(() => {
     // 添加路由钩子函数，用于处理 asyncData.

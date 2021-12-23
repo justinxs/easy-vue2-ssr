@@ -1,21 +1,28 @@
 import LazyModule from './lazyModule';
 
 const lazyModule = new LazyModule({
-    'light': { type: 'css', path: 'themes/light.css' },
-    'night': { type: 'css', path: 'themes/night.css' }
+    sourceMap: {
+        'light': { type: 'css', path: 'themes/light.css' },
+        'night': { type: 'css', path: 'themes/night.css' }
+    },
+    versionMeta: 'timestamp'
 });
+const STATIC_THEME = process.env.THEME;
+let THEME = process.env.THEME;
 
-export function changeTheme(theme) {
-    let lastTheme = window.THEME;
+export async function changeTheme(theme) {
+    let lastTheme = THEME;
 
     if (theme && lastTheme !== theme) {
-        if (window.STATIC_THEME === theme) {
-            lazyModule.remove(lastTheme);
-        } else {
-            lazyModule.load(theme);
-        }
-
         // 修改主题
-        window.THEME = theme;
+        THEME = theme;
+        
+        if (STATIC_THEME === theme) {
+            await lazyModule.remove(lastTheme);
+        } else {
+            await lazyModule.load(theme);
+        }
     }
+
+    return theme;
 }
