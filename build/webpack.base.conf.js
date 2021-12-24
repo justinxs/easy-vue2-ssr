@@ -61,7 +61,14 @@ module.exports = target => {
                                 },
                             },
                         },
-                        'sass-loader'
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                // Prefer dart-sass or node-sass defalut: dart-sass
+                                // dart-sass比node-sass编译慢一倍左右
+                                implementation: require("sass"),
+                            },
+                        }
                     ],
                 },
                 {
