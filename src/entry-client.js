@@ -98,6 +98,5 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach(() => {
-    console.log(NProgress);
     NProgress.done(); // finish progress bar
 });
