@@ -26,7 +26,7 @@ module.exports = (env) => {
         output: {
             path: path.resolve(__dirname, '../dist'),
             filename: 'themes/js/[name].js',
-            publicPath: ''
+            publicPath: '/'
         },
         performance: {
             // 资源文件最大限制大小warning提示

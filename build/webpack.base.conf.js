@@ -13,8 +13,8 @@ module.exports = target => {
             maxEntrypointSize: 1000 * 1024,
         },
         output: {
-            filename: '[name].[chunkhash].js',
-            chunkFilename: '[name].[chunkhash].js',
+            filename: '[name].js',
+            chunkFilename: 'js/[name].js',
             path: path.resolve(__dirname, '../dist'),
             publicPath: '',
         },
