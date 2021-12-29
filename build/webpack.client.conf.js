@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base.conf.js')('client');
@@ -5,6 +6,7 @@ const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env) => {
     const isProd = env.NODE_ENV === 'production';
@@ -63,6 +65,15 @@ module.exports = (env) => {
         mode: env.NODE_ENV,
         entry: './src/entry-client.js',
         plugins: [
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: path.resolve(__dirname, '../static'), 
+                        to: path.resolve(__dirname, '../dist'),
+                        noErrorOnMissing: true
+                    }
+                ]
+            }),
             // 提取style生成 css文件
             new MiniCssExtractPlugin({
                 filename: 'css/[name].[contenthash:8].css',

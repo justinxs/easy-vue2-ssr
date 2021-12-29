@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { VueLoaderPlugin } = require('vue-loader');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = target => {
     return {
@@ -100,15 +99,6 @@ module.exports = target => {
             ],
         },
         plugins: [
-            new CopyWebpackPlugin({
-                patterns: [
-                    {
-                        from: path.resolve(__dirname, '../static'), 
-                        to: path.resolve(__dirname, '../dist'),
-                        noErrorOnMissing: true
-                    }
-                ]
-            }),
             new ESLintPlugin(),
             new VueLoaderPlugin(),
             // 注入webpack编译时js中的全局变量
