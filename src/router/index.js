@@ -18,6 +18,16 @@ export function createRouter() {
             {
                 path: '/foo',
                 component: () => import('../views/Foo.vue')
+            },
+            {
+                path: '/parent',
+                component: () => import('../views/parent/index.vue'),
+                children: [
+                    {
+                        path: 'child',
+                        component: () => import('../views/parent/child.vue')
+                    }
+                ]
             }
         ]
     });

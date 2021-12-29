@@ -64,7 +64,8 @@ module.exports = (env) => {
                         {
                             loader: MiniCssExtractPlugin.loader,
                             options: {
-                                publicPath: '../'
+                                // 相对路径，针对本地打开
+                                // publicPath: '../'
                             }
                         },
                         'css-loader',

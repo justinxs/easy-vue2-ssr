@@ -15,7 +15,7 @@ module.exports = target => {
             filename: '[name].js',
             chunkFilename: 'js/[name].js',
             path: path.resolve(__dirname, '../dist'),
-            publicPath: '',
+            publicPath: '/',
         },
         module: {
             rules: [
@@ -38,7 +38,8 @@ module.exports = target => {
                         } : {
                             loader: MiniCssExtractPlugin.loader,
                             options: {
-                                publicPath: '../'
+                                // 相对路径，针对本地打开
+                                // publicPath: '../'
                             }
                         },
                         {

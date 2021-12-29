@@ -13,5 +13,10 @@ module.exports = [
         path: '/login',
         method: 'get',
         action: 'page'
+    },
+    {
+        path: '/parent/child',
+        method: 'get',
+        action: 'page'
     }
 ];
