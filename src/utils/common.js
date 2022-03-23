@@ -369,7 +369,7 @@ export function openApp(config, callback) {
     const testEnv = {
         isMobile: env.device.type === 'mobile',
         isQQ: /QQ/i.test(env.browser.name) && !env.ua.toLowerCase().includes('mqqbrowser'),
-        isWebo: /WeiBo/i.test(env.browser.name),
+        isWeibo: /WeiBo/i.test(env.browser.name),
         isDing: /DingTalk/i.test(env.ua),
         isMail: /Mail/i.test(env.ua),
         isWeChat: /WeChat/ig.test(env.browser.name),
@@ -377,7 +377,7 @@ export function openApp(config, callback) {
         isAndroid: /Android/ig.test(env.os.name),
         isOverIOS8: /iOS/ig.test(env.os.name) && parseInt(env.os.version) > 8
     };
-    const forbidonEnv = ['isQQ', 'isWebo', 'isDing', 'isMail', 'isWeChat'];
+    const forbidonEnv = ['isQQ', 'isWeibo', 'isDing', 'isMail', 'isWeChat'];
     let ifr, startTime = Date.now(), checkTimeID, thirdEnv;
     config = config && typeof config === 'object' ? config : {};
 
@@ -397,7 +397,7 @@ export function openApp(config, callback) {
         ifr.setAttribute('style', 'display:none');
         document.body.appendChild(ifr);
     }
-    
+
     // 定时20ms检测是否打开了APP(hidden = true => 已打开)，超过3000ms失败
     checkTimeID = setInterval(() => {
         let isOpen = document.hidden || document.webkitHidden, isEnd = Date.now() - startTime > 3000;
