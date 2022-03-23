@@ -17,17 +17,8 @@ const isCacheable = ctx => {
     return false;
 };
 
-const getSeo = name => ({ ...(seoMap[name] || seoMap['/']) });
-
-const mergeContext = (ctx, options) => {
-    const seo = options.seo || getSeo(ctx.path);
-    const context = Object.assign({
-        url: ctx.url,
-        title: '',
-        meta: `<meta name="timestamp" content="${Date.now()}">`,
-        link: `<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">`
-    }, options);
-    
+const setSeo = (seo, context, ctx) => {
+    seo = seo || ({ ...(seoMap[ctx.path] || seoMap['/']) });
     Object.keys(seo).forEach(k => {
         let val = seo[k] || '';
         switch (k) {
@@ -47,7 +38,18 @@ const mergeContext = (ctx, options) => {
         ...JSON.parse(JSON.stringify(seoMap)),
         [ctx.path]: seo
     };
+};
 
+const mergeContext = (ctx, options) => {
+    const context = Object.assign({
+        url: ctx.url,
+        title: '',
+        meta: `<meta name="timestamp" content="${Date.now()}">`,
+        link: `<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">`
+    }, options);
+
+    setSeo(options.seo, context, ctx);
+    
     return context;
 };
 
