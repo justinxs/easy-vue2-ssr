@@ -362,20 +362,32 @@ export function setScrollTop(el, value) {
  * @param {Function} callback 回调
  */
 export function openApp(config, callback) {
-    const scheme = typeof config === 'string' ? config : (config && 'scheme' in config ? config.scheme : 'weixin://');
+    const scheme = typeof config === 'string' 
+        ? config 
+        : (config && 'scheme' in config ? config.scheme : 'weixin://');
     const env = UAParser();
     const testEnv = {
+        isMobile: env.device.type === 'mobile',
+        isQQ: /QQ/i.test(env.browser.name) && !env.ua.toLowerCase().includes('mqqbrowser'),
+        isWebo: /WeiBo/i.test(env.browser.name),
+        isDing: /DingTalk/i.test(env.ua),
+        isMail: /Mail/i.test(env.ua),
         isWeChat: /WeChat/ig.test(env.browser.name),
         isIOS: /iOS/ig.test(env.os.name),
         isAndroid: /Android/ig.test(env.os.name),
         isOverIOS8: /iOS/ig.test(env.os.name) && parseInt(env.os.version) > 8
     };
-    let ifr, startTime = Date.now(), checkTimeID;
+    const forbidonEnv = ['isQQ', 'isWebo', 'isDing', 'isMail', 'isWeChat'];
+    let ifr, startTime = Date.now(), checkTimeID, thirdEnv;
+    config = config && typeof config === 'object' ? config : {};
+
     // 微信内部webview禁止跳转其他APP，除非让TX加上白名单
     // TODO 其它APP内部可能也有禁止跳转策略
-    if (testEnv.isWeChat) {
+    if (forbidonEnv.some(k => testEnv[k] && (thirdEnv = k))) {
+        console.warn(`third env forbidon open APP! ${thirdEnv}`);
         return callback && callback({ isOpen: false, forbidon: true, env });
     }
+
     // ios9 以上使用scheme协议直接打开，其它用iframe
     if (testEnv.isOverIOS8) {
         window.location.href = scheme;
@@ -385,6 +397,7 @@ export function openApp(config, callback) {
         ifr.setAttribute('style', 'display:none');
         document.body.appendChild(ifr);
     }
+    
     // 定时20ms检测是否打开了APP(hidden = true => 已打开)，超过3000ms失败
     checkTimeID = setInterval(() => {
         let isOpen = document.hidden || document.webkitHidden, isEnd = Date.now() - startTime > 3000;
