@@ -82,7 +82,8 @@ async function ssrRender(_context) {
             }
             ctx.type = 'html';
             ctx.body = html;
-        }).catch(err => {
+        })
+        .catch(err => {
             console.error(err);
             if (err.code === 404) {
                 ctx.status = 404;

@@ -6,10 +6,12 @@ const themeConfig = require('../build/webpack.theme.conf.js')(env);
 const rm = require('rimraf');
 const path = require('path');
 const nodemon = require('nodemon');
-const { loadESMoudle } = require('./lib');
+const { loadESMoudle, getLocalIP } = require('./lib');
 
 const compiler = webpack([clientConfig, serverConfig, themeConfig]);
 let serverStart = false;
+
+process.env.LOCAL_IP = getLocalIP();
 
 loadESMoudle(['chalk', 'ora']).then(([chalk, ora]) => {
     const spinner = ora('building...').start();

@@ -53,6 +53,11 @@ module.exports = (env) => {
         minimizer: [
             // webpack v5 开箱即带有最新版本的 terser-webpack-plugin，自定义配置仍需安装
             new TerserPlugin({
+                terserOptions: {
+                    format: {
+                        comments: false,
+                    },
+                },
                 extractComments: false,
                 parallel: true
             }),

@@ -12,8 +12,8 @@ module.exports = target => {
             maxEntrypointSize: 1000 * 1024,
         },
         output: {
-            filename: '[name].js',
-            chunkFilename: 'js/[name].js',
+            filename: '[name].[contenthash:8].js',
+            chunkFilename: 'js/[name].[contenthash:8].js',
             path: path.resolve(__dirname, '../dist'),
             publicPath: '/',
         },
