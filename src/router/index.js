@@ -28,6 +28,10 @@ export function createRouter() {
                         component: () => import('../views/parent/child.vue')
                     }
                 ]
+            },
+            {
+                path: '*',
+                component: () => import('../views/NotFound.vue')
             }
         ]
     });
