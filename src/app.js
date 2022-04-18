@@ -4,6 +4,12 @@ import { createRouter } from './router';
 import { createStore } from './store';
 import { sync } from 'vuex-router-sync';
 import '@/styles/index.scss';
+import { Icon, Toast, Popup, Dialog } from 'vant';
+
+Vue.use(Icon);
+Vue.use(Toast);
+Vue.use(Popup);
+Vue.use(Dialog);
 
 // 导出一个工厂函数，用于创建新的
 // 应用程序、router 和 store 实例

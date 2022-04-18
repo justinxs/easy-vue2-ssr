@@ -1,5 +1,5 @@
 {
-    "presets": [
+	"presets": [
 		[
 			"@babel/preset-env",
 			{
@@ -11,7 +11,16 @@
 			}
 		]
 	],
-    "plugins": [
-        "@babel/syntax-dynamic-import"
-    ]
+	"plugins": [
+		"@babel/syntax-dynamic-import",
+		[
+			"import",
+			{
+				"libraryName": "vant",
+				"libraryDirectory": "lib",
+				"style": true
+			},
+			"vant"
+		]
+	]
 }
